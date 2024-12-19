@@ -377,7 +377,7 @@ Here are our Jenkins pipeline stages
 We have created an environment variable for our ECR repository url
 ```
     environment {
-        registry = "185439933271.dkr.ecr.us-east-1.amazonaws.com/my-ecr-repo"
+        registry = "590184044177.dkr.ecr.us-east-1.amazonaws.com/my-docker-repo"
     }
 ```
 
@@ -427,14 +427,14 @@ The push command is available in our ECR Registry
 Select your repo and click the view push commands button.
 ![get push command](./images/ecr1.png)
 Retrive an identification token and authenticate the docker client by running the AWSCLI command below
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 185439933271.dkr.ecr.us-east-1.amazonaws.com
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 590184044177.dkr.ecr.us-east-1.amazonaws.com
 ![get ecr token](./images/ecr2.png)
 ```
         stage('Push Docker Image') {
             steps {
                script{
-                   sh'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 185439933271.dkr.ecr.us-east-1.amazonaws.com'
-                   sh'docker push 185439933271.dkr.ecr.us-east-1.amazonaws.com/my-ecr-repo:$BUILD_NUMBER'
+                   sh'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 590184044177.dkr.ecr.us-east-1.amazonaws.com'
+                   sh'docker push 590184044177.dkr.ecr.us-east-1.amazonaws.com/my-docker-repo:$BUILD_NUMBER'
                }
             }
         }
@@ -461,7 +461,7 @@ pipeline {
     agent any
     
     environment {
-        registry = "185439933271.dkr.ecr.us-east-1.amazonaws.com/my-ecr-repo"
+        registry = "590184044177.dkr.ecr.us-east-1.amazonaws.com/my-docker-repo"
     }
     stages {
         stage('Git Checkout') {
@@ -490,8 +490,8 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                script{
-                   sh'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 185439933271.dkr.ecr.us-east-1.amazonaws.com'
-                   sh'docker push 185439933271.dkr.ecr.us-east-1.amazonaws.com/my-ecr-repo:$BUILD_NUMBER'
+                   sh'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 590184044177.dkr.ecr.us-east-1.amazonaws.com'
+                   sh'docker push 590184044177.dkr.ecr.us-east-1.amazonaws.com/my-docker-repo:$BUILD_NUMBER'
                }
             }
         }
